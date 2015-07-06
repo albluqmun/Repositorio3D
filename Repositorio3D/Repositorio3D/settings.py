@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Repositorio3D.modelos3D'
 )
 
 MIDDLEWARE_CLASSES = (
