@@ -1,0 +1,10 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ block.super }} - Crear un nuevo modelo3D{% endblock %}
+
+{% block body %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Submit">
+{% endblock %}

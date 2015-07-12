@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ block.super }} - Index{% endblock %}
+
+{% block body %}
+    <p>
+        Bienvenidos a este repositorio de modelos 3D. Este mensaje es solamente temporal y aún está en construcción.
+    </p>
+    <p>
+        <a href="{% url 'crear_modelo' %}">Crear un modelo</a>
+    </p>
+    <p>
+        <a href="{% url 'lista_modelos' %}">Listado de los modelos existentes</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ block.super }} - Lista de modelos 3D{% endblock %}
+
+{% block body %}
+    <h2>Modelos</h2>
+    <ul>
+        {% for modelo in object_list %}
+            <li>
+                {{ modelo.id }} - <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a> - {{ modelo.descripcion }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

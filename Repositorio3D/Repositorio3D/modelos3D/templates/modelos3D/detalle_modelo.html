@@ -1,0 +1,31 @@
+{% extends "base/base.html" %}
+
+{% block title %}{{ block.super }} - {{ modelo.nombre }} {% endblock %}
+
+{% block body %}
+    <p>
+        <h1>Datos del modelo</h1>
+        {{ object }}
+    </p>
+    <p>
+        Aqui ira las imagenes del modelo, si las tiene.
+    </p>
+    <p>
+        Aqui va la valoración en nota (imagen)
+    </p>
+    <p>
+        Faltan los tags
+    </p>
+    <p>
+        Y los comentarios
+    </p>
+    <p>
+        <a href="{% url 'modificar_modelo' object.id %}">Modificar modelo</a>
+    </p>
+    <p>
+        <a href="{% url 'eliminar_modelo' object.id %}">Eliminar modelo</a>
+    </p>
+    <p>
+        <a href="{% url 'index' %}">Volver al inicio</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>{% block title %}Repositorio Modelos 3D{% endblock %}</title>
+    </head>
+    <body>
+        {% block messages %}
+          {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+    </body>
+    <footer>
+        <p>- PFC Alberto Luque Muñoz -</p>
+    </footer>
+
+</html>
