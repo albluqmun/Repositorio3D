@@ -1,0 +1,11 @@
+{% extends "base/base.html" %}
+
+{% block body %}
+Aqui mostraremos los datos del perfil:
+
+<p>Username: {{ user.username }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Primer nombre: {{ user.first_name }}</p>
+<p>Last name: {{ user.last_name }}</p>
+
+{% endblock %}

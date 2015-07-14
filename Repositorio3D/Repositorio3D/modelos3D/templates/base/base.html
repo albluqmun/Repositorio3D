@@ -14,6 +14,18 @@
         {% endblock %}
         {% block body %}
         {% endblock %}
+
+        {% block loginlogout %}
+            {% if user.is_authenticated %}
+                <p>
+                    <a href="{% url 'cuentas:logout' %}">Cierra sesión</a>
+                </p>
+            {% else %}
+                <p>
+                    <a href="{% url 'cuentas:login' %}">Inicia sesión</a>
+                </p>
+            {% endif %}
+        {% endblock %}
     </body>
     <footer>
         <p>- PFC Alberto Luque Muñoz -</p>

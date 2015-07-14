@@ -37,7 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Repositorio3D.modelos3D'
+    'Repositorio3D.modelos3D',
+    'Repositorio3D.cuentas',
+    'formtools'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -85,6 +87,8 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Repositorio3D/media/')
 
 LANGUAGE_CODE = 'en-us'
 
