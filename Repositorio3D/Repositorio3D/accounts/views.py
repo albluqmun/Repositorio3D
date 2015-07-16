@@ -10,8 +10,4 @@ class LoginRequiredMixin(object):
 
 
 class PerfilUsuario(LoginRequiredMixin, TemplateView):
-    template_name = "cuentas/perfil.html"
-
-
-class CierraSesion(TemplateView):
-    template_name = "registration/logged_out.html"
+    template_name = "accounts/perfil.html"

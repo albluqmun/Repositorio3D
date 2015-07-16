@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Repositorio3D.modelos3D',
-    'Repositorio3D.cuentas',
+    'Repositorio3D.accounts',
     'formtools'
 )
 

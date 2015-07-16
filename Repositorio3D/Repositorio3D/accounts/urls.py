@@ -1,12 +1,11 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
-from Repositorio3D.cuentas.views import PerfilUsuario, CierraSesion
+from Repositorio3D.accounts.views import PerfilUsuario
 
 urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, {'template_name': 'registration/logged_out.html'}, name='logout'),
-    url(r'^log_out/$', CierraSesion.as_view(), name='log_out'),
+    url(r'^logout/$', auth_views.logout, kwargs={'template_name': 'registration/logged_out2.html'}, name='logout'),
     url(r'^password_change/$', auth_views.password_change, name='password_change'),
     url(r'^password_change/done/$', auth_views.password_change_done, name='password_change_done'),
     url(r'^password/reset/$', auth_views.password_reset, name='password_reset'),
