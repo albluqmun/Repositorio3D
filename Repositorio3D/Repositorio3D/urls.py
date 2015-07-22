@@ -18,6 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('Repositorio3D.modelos3D.urls')),
-    url(r'^accounts/', include('Repositorio3D.accounts.urls', namespace="accounts")),
+    url(r'^accounts/', include('Repositorio3D.accounts.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]

@@ -1,0 +1,14 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}Crear una cuenta{% endblock %}
+
+{% block body %}
+<form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Enviar" />
+</form>
+{% endblock %}
+
+{% block loginlogout %}{% endblock %}

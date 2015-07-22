@@ -1,0 +1,29 @@
+{% load url from future %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>{{ site.name }} - Email de activación</title>
+</head>
+
+<body>
+<p>
+    Usted (o alguien que pretende ser usted) se ha registrado en {{ site_name }} con esta dirección de correo electrónico. Si 
+    no fue usted, por favor ignore este email y su dirección será eliminada de nuestra base de datos.
+</p>
+<p>
+    Para activar la cuenta, por favor haga click en el siguiente enlace antes de los próximos {{ expiration_days }} días:
+</p>
+
+<p>
+    <a href="http://{{site.domain}}{% url 'registration_activate' activation_key %}">
+        {{site.domain}}{% url 'registration_activate' activation_key %}
+    </a>
+</p>
+<p>
+    Saludos, 
+    {{ site_name }} Admin
+</p>
+</body>
+
+</html>

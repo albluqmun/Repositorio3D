@@ -1,0 +1,27 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}Cuenta activada{% endblock %}
+
+{% block body %}
+<p>
+    Tu cuenta ha sido activada satisfactoriamente. ¡Gracias!
+</p>
+    {% if not user.is_authenticated %}
+<p>
+    Desde este mismo momento, ya puede inciar sesión para disfrutar de la web.
+    {% endif %}
+</p>
+{% endblock %}
+
+{% block loginlogout %}
+    {% if user.is_authenticated %}
+        <p>
+            <a href="{% url 'auth_logout' %}">Cierra sesión</a>
+        </p>
+    {% else %}
+        <p>
+            <a href="{% url 'auth_login' %}">Inicia sesión</a>
+        </p>
+    {% endif %}
+{% endblock %}

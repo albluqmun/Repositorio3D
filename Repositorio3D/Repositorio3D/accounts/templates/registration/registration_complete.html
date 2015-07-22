@@ -1,0 +1,11 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}Correo de activación enviado{% endblock %}
+
+{% block body %}
+<p>Le hemos enviado un correo electrónico a su dirección con los pasos necesarios para activar su cuenta. ¡Gracias por registrarse!</p>
+<p><a href="{% url 'index' %}">Vuelve al index</a></p>
+{% endblock %}
+
+{% block loginlogout %}{% endblock %}

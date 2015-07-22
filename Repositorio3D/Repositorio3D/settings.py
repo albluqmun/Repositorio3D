@@ -39,7 +39,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'Repositorio3D.modelos3D',
     'Repositorio3D.accounts',
-    'formtools'
+    'formtools',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -57,9 +58,10 @@ ROOT_URLCONF = 'Repositorio3D.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'Repositorio3D/modelos3D/templates'),
+                 os.path.join(BASE_DIR, 'Repositorio3D/accounts/templates')],
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -88,6 +90,8 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
+ACCOUNT_ACTIVATION_DAYS = 7
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Repositorio3D/media/')
 
 LANGUAGE_CODE = 'en-us'
@@ -99,6 +103,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+EMAIL_HOST = 'localhost'
+
+EMAIL_PORT = 1025
 
 
 # Static files (CSS, JavaScript, Images)

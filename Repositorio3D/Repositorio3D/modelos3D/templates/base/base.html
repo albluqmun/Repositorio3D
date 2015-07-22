@@ -18,11 +18,14 @@
         {% block loginlogout %}
             {% if user.is_authenticated %}
                 <p>
-                    <a href="{% url 'cuentas:logout' %}">Cierra sesión</a>
+                    <a href="{% url 'auth_logout' %}">Cierra sesión</a>
                 </p>
             {% else %}
                 <p>
-                    <a href="{% url 'cuentas:login' %}">Inicia sesión</a>
+                    <a href="{% url 'auth_login' %}">Inicia sesión</a>
+                </p>
+                <p>
+                    <a href="{% url 'registration_register' %}">Regístrate!!</a>
                 </p>
             {% endif %}
         {% endblock %}
