@@ -114,3 +114,5 @@ EMAIL_PORT = 1025
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "Repositorio3D", "static"),)

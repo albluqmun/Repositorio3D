@@ -1,0 +1,39 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+{% load bootstrap3 %}
+
+{% block head %}
+{{ wizard.form.media }}
+{% endblock %}
+
+{% block body %}
+<p>Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }}</p>
+<form method="post" enctype="multipart/form-data" class="form">
+{% csrf_token %}
+{{ wizard.form.media }}
+{{ wizard.management_form }}
+{% if wizard.form.forms %}
+    {{ wizard.form.management_form }}
+    {% for form in wizard.form.forms %}
+        {{ form.as_p }}
+    {% endfor %}
+{% else %}
+    {{ wizard.form.as_p }}
+{% endif %}
+
+{% if wizard.steps.prev %}
+    {% buttons %}
+        <button name="wizard_goto_step" type="submit" class="btn btn-primary" value="{{ wizard.steps.first }}">
+            {% bootstrap_icon "fast-backward" %} Primer paso
+        </button>
+    {% endbuttons %}
+    {% buttons %}
+        <button name="wizard_goto_step" class="btn btn-primary" type="submit" value="{{ wizard.steps.prev }}">
+            {% bootstrap_icon "step-backward" %} Paso anterior
+        </button>
+    {% endbuttons %}
+{% endif %}
+    <input type="submit" name="submit" class="btn btn-primary" value="{% trans "submit" %}" />
+</form>
+
+{% endblock %}

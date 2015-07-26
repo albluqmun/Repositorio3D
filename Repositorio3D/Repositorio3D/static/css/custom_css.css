@@ -1,0 +1,16 @@
+.title_section {
+    text-align: center;
+    font-size: 30;
+    font-family: fantasy;
+    color: red;
+    padding: 20;
+    background-color: #FCFFDC 
+}
+
+.footer {
+    text-align: center;
+    font-size: 8;
+    font-family: monospace;
+    color: grey;
+}
+
