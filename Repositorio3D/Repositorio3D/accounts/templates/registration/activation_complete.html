@@ -1,15 +1,15 @@
 {% extends "base/base.html" %}
 {% load i18n %}
 
-{% block title %}Cuenta activada{% endblock %}
+{% block title %}{% trans "Account activated" %}{% endblock %}
 
 {% block body %}
 <p>
-    Tu cuenta ha sido activada satisfactoriamente. ¡Gracias!
+    {% trans "Your account has been ativated successfully. Thanks!!" %}
 </p>
     {% if not user.is_authenticated %}
 <p>
-    Desde este mismo momento, ya puede inciar sesión para disfrutar de la web.
+    {% trans "From this moment , you can already logged on to enjoy the web." %}
     {% endif %}
 </p>
 {% endblock %}
@@ -17,11 +17,11 @@
 {% block loginlogout %}
     {% if user.is_authenticated %}
         <p>
-            <a href="{% url 'auth_logout' %}">Cierra sesión</a>
+            <a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a>
         </p>
     {% else %}
         <p>
-            <a href="{% url 'auth_login' %}">Inicia sesión</a>
+            <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
         </p>
     {% endif %}
 {% endblock %}

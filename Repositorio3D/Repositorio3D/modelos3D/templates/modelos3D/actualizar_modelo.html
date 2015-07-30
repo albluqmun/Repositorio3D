@@ -1,10 +1,20 @@
 {% extends "base/base.html" %}
+{% load bootstrap3 %}
+{% load i18n %}
 
-{% block title %}{{ block.super }} - Actualizar modelo{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Modify model" %}{% endblock %}
 
 {% block body %}
-    <form method="post" action="">
-        {% csrf_token %}
-        {{ form.as_p }}
-    <input type="submit" value="Actualizar">
+    <div class="col-lg-6">
+        <form method="post" action="">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% trans "update" %}
+                </button>
+            {% endbuttons %}
+    </div>
 {% endblock %}
+
+{% block loginlogout %}{% endblock %}

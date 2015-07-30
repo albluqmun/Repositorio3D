@@ -1,16 +1,17 @@
 {% extends "base/base.html" %}
+{% load i18n %}
 
-{% block title %}{{ block.super }} - Index{% endblock %}
+{% block title %}{{ block.super }} - {% trans "Index" %}{% endblock %}
 
 {% block body %}
     <p>
-        Bienvenidos a este repositorio de modelos 3D. Este mensaje es solamente temporal y aún está en construcción.
+        {% trans "WELCOME MESSAGE" %}
     </p>
     <p>
-        <a href="{% url 'crear_modelo' %}">Crear un modelo</a>
+        <a href="{% url 'crear_modelo' %}">{% trans "Create a model" %}</a>
     </p>
     <p>
-        <a href="{% url 'lista_modelos' %}">Listado de los modelos existentes</a>
+        <a href="{% url 'lista_modelos' %}">{% trans "List of 3D models" %}</a>
     </p>
     
 {% endblock %}

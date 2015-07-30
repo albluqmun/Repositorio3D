@@ -1,34 +1,39 @@
 {% extends "base/base.html" %}
 {# Load the tag library #}
 {% load bootstrap3 %}
+{% load i18n %}
 
 
 {% block body %}
-{# Display django.contrib.messages as Bootstrap alerts #}
-{% bootstrap_messages %}
+<div class="col-lg-4">
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
 
-{% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
+    {% if next %}
+        {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+        {% else %}
+        <p>Please login to see this page.</p>
+        {% endif %}
     {% endif %}
-{% endif %}
 
-{# Display a form #}
-<form action="{% url 'auth_login' %}" method="post" class="form">
-  {% csrf_token %}
-  {% bootstrap_form form %}
-  {% buttons %}
-    <button type="submit" class="btn btn-primary">
-      {% bootstrap_icon "magnet" %} Submit
-    </button>
-  {% endbuttons %}
-</form>
+    {# Display a form #}
+    <form action="{% url 'auth_login' %}" method="post" class="form">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">
+          {% bootstrap_icon "magnet" %} Submit
+        </button>
+      {% endbuttons %}
+    </form>
 
-<p><a href="{% url 'auth_password_reset' %}">¿Olvidaste la contraseña?</a></p>
+    <p>
+        <a href="{% url 'auth_password_reset' %}">{% trans "Forgot your password?" %}</a>
+    </p>
 
+</div>
 {% endblock %}
 
 {% block loginlogout %}{% endblock %}

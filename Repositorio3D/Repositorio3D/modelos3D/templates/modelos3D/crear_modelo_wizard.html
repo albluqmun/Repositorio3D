@@ -6,34 +6,62 @@
 {{ wizard.form.media }}
 {% endblock %}
 
-{% block body %}
-<p>Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }}</p>
-<form method="post" enctype="multipart/form-data" class="form">
-{% csrf_token %}
-{{ wizard.form.media }}
-{{ wizard.management_form }}
-{% if wizard.form.forms %}
-    {{ wizard.form.management_form }}
-    {% for form in wizard.form.forms %}
-        {{ form.as_p }}
-    {% endfor %}
-{% else %}
-    {{ wizard.form.as_p }}
-{% endif %}
+{% block title %}{% trans "Create a 3D model" %}{% endblock %}
 
-{% if wizard.steps.prev %}
-    {% buttons %}
-        <button name="wizard_goto_step" type="submit" class="btn btn-primary" value="{{ wizard.steps.first }}">
-            {% bootstrap_icon "fast-backward" %} Primer paso
-        </button>
-    {% endbuttons %}
-    {% buttons %}
-        <button name="wizard_goto_step" class="btn btn-primary" type="submit" value="{{ wizard.steps.prev }}">
-            {% bootstrap_icon "step-backward" %} Paso anterior
-        </button>
-    {% endbuttons %}
-{% endif %}
-    <input type="submit" name="submit" class="btn btn-primary" value="{% trans "submit" %}" />
-</form>
+{% block body %}
+    <div class="row">
+        <div class="col-lg-5">
+            <p>
+                Paso {{ wizard.steps.step1 }} de {{ wizard.steps.count }}
+            </p>
+            <form method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                {{ wizard.form.media }}
+                {{ wizard.management_form }}
+                {% if wizard.form.forms %}
+                    {{ wizard.form.management_form }}
+                    {% for form in wizard.form.forms %}
+                        {% bootstrap_form form %}
+                    {% endfor %}
+                {% else %}
+                    {% bootstrap_form form %}
+                {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        {% buttons %}
+        {% if wizard.steps.prev %}
+                <div class="col-lg-2">
+                    <button name="wizard_goto_step" type="submit" class="btn btn-primary" value="{{ wizard.steps.first }}">
+                        {% bootstrap_icon "fast-backward" %} {% trans "Firs step" %}
+                    </button>
+                </div>
+                <div class="col-lg-2">
+                    <button name="wizard_goto_step" class="btn btn-primary" type="submit" value="{{ wizard.steps.prev }}">
+                        {% bootstrap_icon "step-backward" %} {% trans "Previous step" %}
+                    </button>
+                </div>
+        {% endif %}
+    
+        <div class="col-lg-2">
+            {% if wizard.steps.step1  == 3 %}
+                {% buttons %}
+                    <button name="submit" class="btn btn-primary" type="submit" value="{% trans "create" %}">
+                        {% trans "Create" %}
+                    </button>
+                {% endbuttons %}
+            {% else %}
+                {% buttons %}
+                    <button name="submit" class="btn btn-primary" type="submit" value="{% trans "submit" %}">
+                        {% bootstrap_icon "step-forward" %} {% trans "Next step" %}
+                    </button>
+                {% endbuttons %}
+            {% endif %}
+
+        </div>
+        {% endbuttons %}
+            </form>
+    </div>
 
 {% endblock %}

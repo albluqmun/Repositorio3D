@@ -2,8 +2,15 @@
 {% load i18n %}
 
 {% block body %}
-<p>Error en la activación de la cuenta. Este enlace no es un código válido. Si ha recibido este enlace en su correo de activación 
-de la cuenta, por favor compruebe que no haya pasado más de 7 días desde la recepción del mismo. En caso de ser así, cree la cuenta de nuevo.</p>
+<p>
+    {% trans "Account ativation failed." %}
+</p>
 
 <p><a href="{% url 'index' %}">Vuelve al index</a></p>
 {% endblock %}
+
+
+{% comment %}
+<p>Error en la activación de la cuenta. Este enlace no es un código válido. Si ha recibido este enlace en su correo de activación 
+de la cuenta, por favor compruebe que no haya pasado más de 7 días desde la recepción del mismo. En caso de ser así, cree la cuenta de nuevo.</p>
+{% endcomment %}

@@ -1,3 +1,22 @@
+body {
+    background-color: #ebebeb;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+a {
+    color: #c0392b;
+}
+a:active,
+a:hover {
+    color: #e67e22;
+    text-decoration: none;
+}
+
 .title_section {
     text-align: center;
     font-size: 30;
@@ -11,6 +30,27 @@
     text-align: center;
     font-size: 8;
     font-family: monospace;
-    color: grey;
+    border-top: 2px solid #e74c3c;
+    padding: 15px;
+    margin-top: 15px;
+    background-color: #f1f1f1;
 }
 
+.content{
+    padding: 0 15px;
+    max-width: 1170px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #c0392b;
+    border-color: #c0392b;
+    font-weight: bold;
+}
+
+.btn-primary:hover {
+    color: #000000;
+    background-color: #c0392b;
+    border-color: #c0392b;

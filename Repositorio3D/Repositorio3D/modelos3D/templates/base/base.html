@@ -1,52 +1,62 @@
 {# Load the tag library #}
 {% load bootstrap3 %}
 {% load staticfiles %}
+{% load i18n %}
 <html>
     <head>
         {# Load CSS and JavaScript #}
         {% bootstrap_css %}
         <link href="{% static "css/custom_css.css" %}" rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="{% static "favicon.ico" %}">
+        <link href='http://fonts.googleapis.com/css?family=Raleway:700,400' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         {% bootstrap_javascript %}
-        <title>{% block title %}Repositorio Modelos 3D{% endblock %}</title>
+        <title>{% block title %}{% trans "3D Repository" %}{% endblock %}</title>
     </head>
     <body>
         <div class="row">
             <div class="title_section">
-                AQUI IRA LA CABECERA, POR AHORA SOLAMENTE TEXTO LIGERAMENTE PERSONALIZADO
+                <h1>
+                    AQUI IRA LA CABECERA, POR AHORA SOLAMENTE TEXTO LIGERAMENTE PERSONALIZADO
+                </h1>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-1">
-            </div>
-            <div class="col-lg-2">
-                {% include "base/lateral_menu.html" %}
-            </div>
-            <div class="col-lg-9">
-                {# Display django.contrib.messages as Bootstrap alerts #}
-                {% bootstrap_messages %}
-                {% block body %}
-                {% endblock %}
+        <div class="content">
+            <div class="row">
+                <div class="col-lg-1">
+                </div>
+                <div class="col-lg-2">
+                    {% include "base/lateral_menu.html" %}
+                </div>
+                <div class="col-lg-9">
+                    {# Display django.contrib.messages as Bootstrap alerts #}
+                    {% bootstrap_messages %}
+                    {% block body %}
+                    {% endblock %}
 
-                {% block loginlogout %}
-                    {% if user.is_authenticated %}
-                        <p>
-                            <a href="{% url 'auth_logout' %}">Cierra sesión</a>
-                        </p>
-                    {% else %}
-                        <p>
-                            <a href="{% url 'auth_login' %}">Inicia sesión</a>
-                        </p>
-                        <p>
-                            <a href="{% url 'registration_register' %}">Regístrate!!</a>
-                        </p>
-                    {% endif %}
-                {% endblock %}
+                    {% block loginlogout %}
+                        {% if user.is_authenticated %}
+                            <p>
+                                <a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a>
+                            </p>
+                        {% else %}
+                            <p>
+                                <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
+                            </p>
+                            <p>
+                                <a href="{% url 'registration_register' %}">{% trans "Sign in" %}</a>
+                            </p>
+                        {% endif %}
+                    {% endblock %}
+                </div>
             </div>
         </div>
     </body>
     <footer>
         <div class="footer">
-        <p>- PFC Alberto Luque Muñoz -</p>
+            <p>
+                <a href="{% url 'index' %}">- PFC Alberto Luque Muñoz -</a>
+            </p>
         </div>
     </footer>
 
