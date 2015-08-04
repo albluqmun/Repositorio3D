@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import htmlentitydefs
+
 import os
 from datetime import datetime
 from django.http import HttpResponseRedirect
@@ -10,10 +12,14 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from formtools.wizard.views import SessionWizardView
 
 from Repositorio3D.modelos3D.models import Model3D, TagsModelos, ImagenesModelos
 from Repositorio3D.modelos3D.forms import CrearModelo3DForm, ImagenesModelosForm, TagsModelosForm
+# from Repositorio3D.accounts.views import LoginRequiredMixin
 
 
 class Index(TemplateView):
@@ -55,10 +61,13 @@ class CrearModeloWizard(SessionWizardView):
     form_list = [CrearModelo3DForm, ImagenesModelosForm, TagsModelosForm]
     file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'tmp'))
 
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super(CrearModeloWizard, self).dispatch(*args, **kwargs)
+
     def done(self, form_list, form_dict, **kwargs):
-        print form_dict
         modelo = form_dict['0']
-        modelo_creado = Model3D.objects.create(nombre=modelo.data['0-nombre'], descripcion=modelo.data['0-descripcion'], valoracion=int(modelo.data['0-valoracion']))
+        modelo_creado = Model3D.objects.create(nombre=modelo.data['0-nombre'], descripcion=modelo.data['0-descripcion'], user=self.request.user)
 
         actual_time = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
         imagen_form = form_dict['1']
@@ -67,7 +76,35 @@ class CrearModeloWizard(SessionWizardView):
         ImagenesModelos.objects.create(modelo=modelo_creado, imagen=imagen_file)
 
         tags = form_dict['2']
-        TagsModelos.objects.get_or_create(tag=tags.data['2-tag'], modelo=modelo_creado)
+        sequency_tags = str(tags.data['2-tag']).split(',')
+        for single_tag in sequency_tags:
+            TagsModelos.objects.get_or_create(tag=single_tag.lstrip(), modelo=modelo_creado)
 
         # esto reenviará a la página del modelo que se acaba de crear
         return HttpResponseRedirect('/crear/')
+
+    def uescape(self, text):
+        print repr(text)
+        escaped_chars = []
+        for c in text:
+            if (ord(c) < 32) or (ord(c) > 126):
+                c = '&{};'.format(htmlentitydefs.codepoint2name[ord(c)])
+            escaped_chars.append(c)
+        return ''.join(escaped_chars)
+
+
+class VerModelosTags(ListView):
+    # queryset = Model3D.objects.filter('-publication_date')
+    context_object_name = 'modelos'
+    pk_url_kwarg = 'tag_name'
+    model = Model3D
+    template_name = 'modelos3D/lista_tag_modelos.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(tagsmodelos__tag=self.kwargs[self.pk_url_kwarg])
+
+    def get_context_data(self, **kwargs):
+        context = super(VerModelosTags, self).get_context_data(**kwargs)
+        nombre_tag = self.kwargs[self.pk_url_kwarg]
+        context['nombre_tag'] = nombre_tag
+        return context

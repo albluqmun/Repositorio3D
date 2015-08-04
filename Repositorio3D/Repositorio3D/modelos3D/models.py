@@ -1,8 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 fs = FileSystemStorage(location='Repositorio3D/media/imagenes')
 
@@ -11,13 +13,22 @@ fs = FileSystemStorage(location='Repositorio3D/media/imagenes')
 class Model3D(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(blank=True)
-    valoracion = models.DecimalField(default=0, max_digits=4, decimal_places=2)
+    valoracion = models.FloatField(
+        validators=[MinValueValidator(0), MaxValueValidator(10)],
+        default=0)
+    user = models.ForeignKey(User, null=True)
 
     def __unicode__(self):
         return u'%s - %s' % (self.nombre, self.descripcion)
 
     def get_absolute_url(self):
         return reverse('index')
+
+    def get_imagenes(self):
+        return self.imagenesmodelos_set.filter()
+
+    def get_tags(self):
+        return self.tagsmodelos_set.filter()
 
     class Meta:
         verbose_name = 'Modelo 3D'

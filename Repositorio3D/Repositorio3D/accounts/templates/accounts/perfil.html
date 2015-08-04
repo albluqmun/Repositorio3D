@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load i18n %}
 
 {% block body %}
 Aqui mostraremos los datos del perfil:
@@ -8,9 +9,11 @@ Aqui mostraremos los datos del perfil:
 <p>Primer nombre: {{ user.first_name }}</p>
 <p>Last name: {{ user.last_name }}</p>
 
+<p>
+    <a href="{% url 'crear_modelo' %}">{% trans "Create a model" %}</a>
+</p>
+
 {% endblock %}
-
-
 
 {% comment %}
 poner todo el texto con {% trans "" %} y el load internacionalizacion

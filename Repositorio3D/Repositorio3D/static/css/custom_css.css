@@ -54,3 +54,20 @@ a:hover {
     color: #000000;
     background-color: #c0392b;
     border-color: #c0392b;
+}
+
+.valoracion {
+    color: blue;
+    font-size: 25;
+}
+
+.tag_button {
+    color: #FBFBFB;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #6AD8A7;
+    box-shadow: 1px 1px #ababab;
+}
+.tag_button:hover {
+    color: #000000;
+}

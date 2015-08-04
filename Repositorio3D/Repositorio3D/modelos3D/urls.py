@@ -1,4 +1,7 @@
+from django.conf import settings
 from django.conf.urls import url
+from django.conf.urls.static import static
+
 from Repositorio3D.modelos3D import views
 
 urlpatterns = [
@@ -8,4 +11,5 @@ urlpatterns = [
     url(r'modelos/(?P<modelo_id>\d+)/modificar/$', views.ModificarModelo.as_view(), name="modificar_modelo"),
     url(r'modelos/(?P<modelo_id>\d+)/eliminar/$', views.EliminarModelo.as_view(), name="eliminar_modelo"),
     url(r'crear/$', views.CrearModeloWizard.as_view(), name="crear_modelo"),
-]
+    url(r'tag/(?P<tag_name>(\w+\s*)+)/$', views.VerModelosTags.as_view(), name="ver_modelos_tags"),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

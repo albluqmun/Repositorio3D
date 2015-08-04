@@ -6,7 +6,7 @@ class CrearModelo3DForm(forms.ModelForm):
 
     class Meta:
         model = Model3D
-        fields = ('nombre', 'descripcion', 'valoracion')
+        fields = ('nombre', 'descripcion')
 
 
 class ImagenesModelosForm(forms.ModelForm):

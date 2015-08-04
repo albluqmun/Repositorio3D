@@ -3,7 +3,7 @@ from Repositorio3D.modelos3D.models import Model3D, TagsModelos, ImagenesModelos
 
 
 class Modelos3DAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'descripcion', 'valoracion')
+    list_display = ('nombre', 'descripcion', 'valoracion', 'user')
 admin.site.register(Model3D, Modelos3DAdmin)
 
 

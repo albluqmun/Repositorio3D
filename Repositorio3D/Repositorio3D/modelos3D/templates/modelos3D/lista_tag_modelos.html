@@ -1,0 +1,15 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} - Tags '{{ nombre_tag }}'{% endblock %}
+
+{% block body %}
+    <h2>Tags '{{ nombre_tag }}'</h2>
+    <ul>
+        {% for modelo in modelos %}
+            <li>
+                {{ modelo.id }} - <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a> - {{ modelo.descripcion }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,24 +1,31 @@
 {% extends "base/base.html" %}
 {% load i18n %}
 
-{% block title %}{{ block.super }} - {{ modelo.nombre }} {% endblock %}
+{% block title %}{{ block.super }} - {{ object.nombre }} {% endblock %}
 
 {% block body %}
-    <p>
-        <h1>
-            {% trans "Model info" %}
-        </h1>
-        {{ object }}
-    </p>
-    <p>
-        Aqui ira las imagenes del modelo, si las tiene.
-    </p>
-    <p>
-        Aqui va la valoración en nota (imagen)
-    </p>
-    <p>
-        Faltan los tags
-    </p>
+    <h1>
+        {{object.nombre}}
+    </h1>
+    <div class="imagen_principal">
+        {% for imagen in object.get_imagenes %}
+            <img src="{{ imagen.imagen.url }}" />
+        {% endfor %}
+    </div>
+    <div class="descripcion">
+        {{ object.descripcion }}
+    </div>
+    <div class="valoracion">
+        {{ object.valoracion }}
+    </div>
+    <div class="tags">
+        {% for tag in object.get_tags %}
+            <a class="tag_button" href="{% url 'ver_modelos_tags' tag.tag %}">{{ tag.tag }}</a>
+        {% endfor %}
+    </div>
+    <div class="autor">
+        {{ object.user }}
+    </div>
     <p>
         Y los comentarios
     </p>

@@ -93,7 +93,8 @@ DATABASES = {
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'Repositorio3D/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Repositorio3D/media/imagenes/')
+MEDIA_URL = '/media/'
 
 LANGUAGE_CODE = 'en-us'
 
