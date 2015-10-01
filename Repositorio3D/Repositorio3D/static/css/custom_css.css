@@ -56,9 +56,26 @@ a:hover {
     border-color: #c0392b;
 }
 
+.descripcion_title{
+    font-size: 20px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.autor{
+    font-size: initial;
+    font-style: italic;
+}
+
 .valoracion {
     color: blue;
-    font-size: 25;
+    font-size: 40;
+    font-family: sans-serif;
+}
+
+.tags{
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
 
 .tag_button {

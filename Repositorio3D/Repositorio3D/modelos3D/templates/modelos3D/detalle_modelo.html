@@ -7,35 +7,43 @@
     <h1>
         {{object.nombre}}
     </h1>
-    <div class="imagen_principal">
-        {% for imagen in object.get_imagenes %}
-            <img src="{{ imagen.imagen.url }}" />
-        {% endfor %}
-    </div>
-    <div class="descripcion">
-        {{ object.descripcion }}
-    </div>
-    <div class="valoracion">
-        {{ object.valoracion }}
+    <div class="row">
+        <div class="imagen_principal col-lg-8">
+            {% for imagen in object.get_imagenes %}
+                <img src="{{ imagen.imagen.url }}" width="550" />
+            {% endfor %}
+        </div>
+        <div class="valoracion col-lg-4">
+            {{ object.valoracion|floatformat }}
+            <div class="autor">
+                {% trans "Author" %}: {{ object.user }}
+            </div>
+        </div>
     </div>
     <div class="tags">
         {% for tag in object.get_tags %}
             <a class="tag_button" href="{% url 'ver_modelos_tags' tag.tag %}">{{ tag.tag }}</a>
         {% endfor %}
     </div>
-    <div class="autor">
-        {{ object.user }}
+    <div class="descripcion_title">
+        {% trans "Description" %}:
+    </div>
+    <div class="descripcion">
+        {{ object.descripcion }}
     </div>
     <p>
         Y los comentarios
     </p>
-    <p>
-        <a href="{% url 'modificar_modelo' object.id %}">{% trans "Modify model" %}</a>
-    </p>
-    <p>
-        <a href="{% url 'eliminar_modelo' object.id %}">{% trans "Delete model" %}</a>
-    </p>
+    {% ifequal user object.user %}
+        <p>
+            <a href="{% url 'modificar_modelo' object.id %}">{% trans "Modify model" %}</a>
+        </p>
+        <p>
+            <a href="{% url 'eliminar_modelo' object.id %}">{% trans "Delete model" %}</a>
+        </p>
+    {% endifequal %}
     <p>
         <a href="{% url 'index' %}">{% trans "Return to index" %}</a>
     </p>
+
 {% endblock %}

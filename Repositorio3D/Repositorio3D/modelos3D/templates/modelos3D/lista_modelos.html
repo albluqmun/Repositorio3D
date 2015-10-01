@@ -8,7 +8,10 @@
     <ul>
         {% for modelo in object_list %}
             <li>
-                {{ modelo.id }} - <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a> - {{ modelo.descripcion }}
+                {% with modelo.imagenesmodelos_set.all|first as image %}
+                    <img src="{{ image.imagen.url }}" heigh="100" width="100" />
+                    <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a>
+                {% endwith %} 
             </li>
         {% endfor %}
     </ul>

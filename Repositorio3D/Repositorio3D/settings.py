@@ -41,7 +41,7 @@ INSTALLED_APPS = (
     'Repositorio3D.accounts',
     'formtools',
     'registration',
-    'bootstrap3'
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (

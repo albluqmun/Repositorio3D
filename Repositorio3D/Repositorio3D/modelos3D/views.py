@@ -50,6 +50,7 @@ class ModificarModelo(UpdateView):
 
 
 class EliminarModelo(DeleteView):
+    # hacer que elimine tambien las imagenes asociadas
     model = Model3D
     pk_url_kwarg = 'modelo_id'
     success_url = reverse_lazy('index')
