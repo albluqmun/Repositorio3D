@@ -5,14 +5,18 @@
 
 {% block body %}
     <h2>{% trans "Models" %}</h2>
-    <ul>
-        {% for modelo in object_list %}
-            <li>
-                {% with modelo.imagenesmodelos_set.all|first as image %}
-                    <img src="{{ image.imagen.url }}" heigh="100" width="100" />
-                    <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a>
-                {% endwith %} 
-            </li>
-        {% endfor %}
-    </ul>
+        <div class="row">
+            {% for modelo in object_list %}
+                <div class="col-lg-4">
+                    {% with modelo.imagenesmodelos_set.all|first as image %}
+                        <img src="{{ image.imagen.url }}" heigh="100" width="100" />
+                        <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }} - {{ forloop.counter }}</a>
+                    {% endwith %}
+                </div>
+                {% if forloop.counter|divisibleby:3 %}
+                    </div>
+                    <div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
 {% endblock %}
