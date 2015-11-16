@@ -72,9 +72,12 @@ class CrearModeloWizard(SessionWizardView):
 
         actual_time = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
         imagen_form = form_dict['1']
-        imagen_file = imagen_form.files['1-imagen']
-        imagen_file.name = '%s-%s%s' % (modelo_creado.nombre, actual_time, os.path.splitext(imagen_file.name)[-1])
-        ImagenesModelos.objects.create(modelo=modelo_creado, imagen=imagen_file)
+        if '1-imagen' in imagen_form.files:
+            imagen_file = imagen_form.files['1-imagen']
+            imagen_file.name = '%s-%s%s' % (modelo_creado.nombre, actual_time, os.path.splitext(imagen_file.name)[-1])
+            ImagenesModelos.objects.create(modelo=modelo_creado, imagen=imagen_file)
+        else:
+            ImagenesModelos.objects.create(modelo=modelo_creado)
 
         tags = form_dict['2']
         sequency_tags = str(tags.data['2-tag']).split(',')

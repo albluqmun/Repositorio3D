@@ -37,7 +37,7 @@ class Model3D(models.Model):
 
 class ImagenesModelos(models.Model):
     modelo = models.ForeignKey('Model3D')
-    imagen = models.ImageField(storage=fs)
+    imagen = models.ImageField(storage=fs, blank=True, default='image-not-available.png')
 
     class Meta:
         verbose_name = 'Imagen'
@@ -46,7 +46,7 @@ class ImagenesModelos(models.Model):
 
 class TagsModelos(models.Model):
     modelo = models.ForeignKey('Model3D')
-    tag = models.CharField(max_length=50)
+    tag = models.CharField(max_length=50, blank=True)
 
     class Meta:
         verbose_name = 'Tag'
