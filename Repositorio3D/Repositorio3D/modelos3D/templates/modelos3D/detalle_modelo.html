@@ -22,7 +22,9 @@
     </div>
     <div class="tags">
         {% for tag in object.get_tags %}
-            <a class="tag_button" href="{% url 'ver_modelos_tags' tag.tag %}">{{ tag.tag }}</a>
+            {% if tag.tag != '' %}
+                <a class="tag_button" href="{% url 'ver_modelos_tags' tag.tag %}">{{ tag.tag }}</a>
+            {% endif %}
         {% endfor %}
     </div>
     <div class="descripcion_title">
