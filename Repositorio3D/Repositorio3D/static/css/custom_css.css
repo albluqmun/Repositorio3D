@@ -37,10 +37,11 @@ a:hover {
 }
 
 .content{
-    padding: 0 15px;
+    padding: 15px;
     max-width: 1170px;
     margin: 0 auto;
     background-color: white;
+    min-height: 80%;
 }
 
 .btn-primary {
@@ -87,4 +88,8 @@ a:hover {
 }
 .tag_button:hover {
     color: #000000;
+}
+
+.account_div {
+    float: right;
 }

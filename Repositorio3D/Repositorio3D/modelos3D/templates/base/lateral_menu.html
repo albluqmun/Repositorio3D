@@ -1,1 +1,9 @@
-{% lorem 3 p %}
+{% load i18n %}
+<ul>
+    <li>
+        <a href="{% url 'index' %}">{% trans "Home" %}</a>
+    </li>
+    <li>
+        <a href="{% url 'account_profile' %}">{% trans "Profile" %}</a>
+    </li>
+</ul>

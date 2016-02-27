@@ -16,8 +16,22 @@
     <body>
         <div class="row">
             <div class="title_section">
+                {% block loginlogout %}
+                    <div class="account_div">
+                        {% if user.is_authenticated %}
+                            <div class="log_out">
+                                <a href="{% url 'auth_logout' %}" class="btn btn-primary">{% trans "Log out" %}</a>
+                            </div>
+                        {% else %}
+                            <div class="log_on">
+                                <a href="{% url 'auth_login' %}" class="btn btn-primary">{% trans "Log in" %}</a>
+                                <a href="{% url 'registration_register' %} " class="btn btn-primary">{% trans "Sign in" %}</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endblock %}
                 <h1>
-                    AQUI IRA LA CABECERA, POR AHORA SOLAMENTE TEXTO LIGERAMENTE PERSONALIZADO
+                    {% trans "3D Repository Models" %}
                 </h1>
             </div>
         </div>
@@ -32,21 +46,6 @@
                     {# Display django.contrib.messages as Bootstrap alerts #}
                     {% bootstrap_messages %}
                     {% block body %}
-                    {% endblock %}
-
-                    {% block loginlogout %}
-                        {% if user.is_authenticated %}
-                            <p>
-                                <a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a>
-                            </p>
-                        {% else %}
-                            <p>
-                                <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
-                            </p>
-                            <p>
-                                <a href="{% url 'registration_register' %}">{% trans "Sign in" %}</a>
-                            </p>
-                        {% endif %}
                     {% endblock %}
                 </div>
             </div>
