@@ -1,25 +1,30 @@
-gestionar password change
-eliminar cuenta
-hacer que el login no sea accesible si ya hay un usuario activo y revisar {% trans}
-hacer q el has olvidado tu contraseña? sea solo para usuarios no registrados
+- gestionar password change
+- eliminar cuenta
+- revisar y traducir {% trans}
+- hacer q el has olvidado tu contraseña? sea solo para usuarios no registrados
 
-El login required para crear un modelo redirige a perfil en lugar de crear un modelo
-Acentos, ñ en los tags -> Problema del unicode al español:
+- El login required para crear un modelo redirige a perfil en lugar de crear un modelo
+-Acentos, ñ en los tags -> Problema del unicode al español:
     import sys  
 
     reload(sys)  
     sys.setdefaultencoding('utf8')
 
-modficar modelo: que se cambie tambien las imagenes y los tags
-el campo tag en el formulario crear debe admitir mas caracteres
+- modficar modelo: que se cambie tambien las imagenes y los tags
+- el campo tag en el formulario crear debe admitir mas caracteres
 
 
+*
+*
+ACTUALMENTE HACINEDO
+*
+*
 
-
-
+- formulario modificar tu perfil
+- hacer que sólo el propio usuario o un administrador pueda modificar los modelos
 
 
 
 CSS:
-tamaño maximo imagen
-Recuadro valoracion
+- tamaño maximo imagen
+- Recuadro valoracion

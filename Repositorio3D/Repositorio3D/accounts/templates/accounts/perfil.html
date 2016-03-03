@@ -2,19 +2,14 @@
 {% load i18n %}
 
 {% block body %}
-Aqui mostraremos los datos del perfil:
-
-<p>Username: {{ user.username }}</p>
-<p>Email: {{ user.email }}</p>
-<p>Primer nombre: {{ user.first_name }}</p>
-<p>Last name: {{ user.last_name }}</p>
-
-<p>
-    <a href="{% url 'crear_modelo' %}">{% trans "Create a model" %}</a>
-</p>
-
+<div class="profile">
+    {% blocktrans with usuario=user.username %}Hi {{ usuario }}, here you can change your email address, see your 3D models or create a new 3D model.{% endblocktrans %}
+    <p>{% trans "Email" %}: {{ user.email }}</p>
+    <p>
+        <a href="{% url 'ver_mis_modelos' user.id %}">{% trans "View my models" %}</a>
+    </p>
+    <p>
+        <a href="{% url 'crear_modelo' %}">{% trans "Create a model" %}</a>
+    </p>
+</div>
 {% endblock %}
-
-{% comment %}
-poner todo el texto con {% trans "" %} y el load internacionalizacion
-{% endcomment %}

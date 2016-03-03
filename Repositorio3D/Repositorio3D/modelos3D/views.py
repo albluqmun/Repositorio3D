@@ -112,3 +112,22 @@ class VerModelosTags(ListView):
         nombre_tag = self.kwargs[self.pk_url_kwarg]
         context['nombre_tag'] = nombre_tag
         return context
+
+
+class VerMisModelos(ListView):
+#     # queryset = Model3D.objects.filter('-publication_date')
+    context_object_name = 'modelos'
+    pk_url_kwarg = 'user_id'
+    model = Model3D
+    # crear
+    template_name = 'modelos3D/lista_mis_modelos.html'
+
+    def get_queryset(self):
+        #cuidado
+        return self.model.objects.filter(user_id=self.kwargs[self.pk_url_kwarg])
+
+#     def get_context_data(self, **kwargs):
+#         context = super(VerModelosTags, self).get_context_data(**kwargs)
+#         nombre_tag = self.kwargs[self.pk_url_kwarg]
+#         context['nombre_tag'] = nombre_tag
+#         return context

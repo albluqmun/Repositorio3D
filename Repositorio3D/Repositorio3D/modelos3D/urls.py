@@ -12,4 +12,8 @@ urlpatterns = [
     url(r'modelos/(?P<modelo_id>\d+)/eliminar/$', views.EliminarModelo.as_view(), name="eliminar_modelo"),
     url(r'crear/$', views.CrearModeloWizard.as_view(), name="crear_modelo"),
     url(r'tag/(?P<tag_name>(\w+\s*)+)/$', views.VerModelosTags.as_view(), name="ver_modelos_tags"),
+    # este nombre es muy feo
+    url(r'usuario/(?P<user_id>\d+)/mis_modelos$', views.VerMisModelos.as_view(), name="ver_mis_modelos"),
+
+    # VerMisModelos
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
