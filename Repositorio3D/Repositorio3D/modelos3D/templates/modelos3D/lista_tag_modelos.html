@@ -5,15 +5,19 @@
 
 {% block body %}
     <h2>Tags '{{ nombre_tag }}'</h2>
-    <ul>
+    <div class="row grid-row">
         {% for modelo in modelos %}
-            <li>
-                {{ modelo.id }} - <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a> - {{ modelo.descripcion }}
-            </li>
+            <div class="col-lg-4 grid-colum">
+                {% with modelo.imagenesmodelos_set.all|first as image %}
+                    <img src="{{ image.imagen.url }}" class="minimagen" />
+                    <br>
+                    <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a>
+                {% endwith %}
+            </div>
+            {% if forloop.counter|divisibleby:3 %}
+                </div>
+                <div class="row grid-row">
+            {% endif %}
         {% endfor %}
-    </ul>
+    </div>
 {% endblock %}
-
-{% comment %}
-LOS TRANS!!
-{% endcomment %}

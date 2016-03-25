@@ -23,7 +23,7 @@ a:hover {
     font-family: fantasy;
     color: red;
     padding: 20;
-    background-color: #FCFFDC 
+    background-color: #FCFFDC
 }
 
 .footer {
@@ -92,4 +92,20 @@ a:hover {
 
 .account_div {
     float: right;
+}
+
+.grid-row {
+    margin: 10px;
+}
+
+.grid-colum {
+    text-align: center;
+    height: 240px;
+}
+
+.minimagen {
+    height: auto;
+    width: auto;
+    max-width: 150px;
+    max-height: 150px
 }

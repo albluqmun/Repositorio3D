@@ -5,9 +5,9 @@
 
 - El login required para crear un modelo redirige a perfil en lugar de crear un modelo
 -Acentos, ñ en los tags -> Problema del unicode al español:
-    import sys  
+    import sys
 
-    reload(sys)  
+    reload(sys)
     sys.setdefaultencoding('utf8')
 
 - modficar modelo: que se cambie tambien las imagenes y los tags
@@ -22,9 +22,10 @@ ACTUALMENTE HACINEDO
 
 - formulario modificar tu perfil
 - hacer que sólo el propio usuario o un administrador pueda modificar los modelos
+-clara.io
 
 
 
 CSS:
-- tamaño maximo imagen
+- recuadro en el grid (preguntar a edu)
 - Recuadro valoracion
