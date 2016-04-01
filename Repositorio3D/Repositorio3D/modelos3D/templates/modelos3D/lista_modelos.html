@@ -7,7 +7,7 @@
     <h2>{% trans "Models" %}</h2>
     <div class="row grid-row">
         {% for modelo in object_list %}
-            <div class="col-lg-4 grid-colum">
+            <div class="col-lg-4 grid-column">
                 {% with modelo.imagenesmodelos_set.all|first as image %}
                     <img class="minimagen" src="{{ image.imagen.url }}" />
                     <br>

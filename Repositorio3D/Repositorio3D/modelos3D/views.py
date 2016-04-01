@@ -37,16 +37,32 @@ class VerModelo(DetailView):
     template_name = 'modelos3D/detalle_modelo.html'
 
 
-class CrearModelo(CreateView):
-    form_class = CrearModelo3DForm
-    template_name = 'modelos3D/crear_modelo.html'
-
-
-class ModificarModelo(UpdateView):
-    form_class = CrearModelo3DForm
+class BaseModificarModelo(UpdateView):
     model = Model3D
     pk_url_kwarg = 'modelo_id'
     template_name = 'modelos3D/actualizar_modelo.html'
+
+    def get_success_url(self):
+        return reverse_lazy('detalle_modelos', kwargs=self.kwargs)
+
+class ModificarDescripcionModelo(BaseModificarModelo):
+    fields = ['descripcion']
+
+
+class ModificarNombreModelo(BaseModificarModelo):
+    fields = ['nombre']
+
+# por hacer!!!!
+# class ModificarTagModelo(UpdateView):
+#     model = TagsModelos
+#     form_class = TagsModelosForm
+#     pk_url_kwarg = 'modelo_id'
+#     template_name = 'modelos3D/actualizar_modelo.html'
+#
+#     def get_queryset(self):
+#         #cuidado
+#         import ipdb; ipdb.set_trace()
+#         return self.model.objects.filter(modelo_id=self.kwargs[self.pk_url_kwarg])
 
 
 class EliminarModelo(DeleteView):

@@ -6,6 +6,9 @@
 {% block body %}
     <h1>
         {{object.nombre}}
+        {% ifequal user object.user %}
+            <a class="edit-model glyphicon glyphicon-pencil" href="{% url 'modificar_nombre_modelo' object.id %}"></a>
+        {% endifequal %}
     </h1>
     <div class="row">
         <div class="imagen_principal col-lg-8">
@@ -26,9 +29,15 @@
                 <a class="tag_button" href="{% url 'ver_modelos_tags' tag.tag %}">{{ tag.tag }}</a>
             {% endif %}
         {% endfor %}
+        {% ifequal user object.user %}
+            <a class="edit-model glyphicon glyphicon-pencil" href="{% url 'modificar_tag_modelo' object.id %}"></a>
+        {% endifequal %}
     </div>
     <div class="descripcion_title">
         {% trans "Description" %}:
+        {% ifequal user object.user %}
+            <a class="edit-model glyphicon glyphicon-pencil" href="{% url 'modificar_descripcion_modelo' object.id %}"></a>
+        {% endifequal %}
     </div>
     <div class="descripcion">
         {{ object.descripcion }}
@@ -37,9 +46,6 @@
         Y los comentarios
     </p>
     {% ifequal user object.user %}
-        <p>
-            <a href="{% url 'modificar_modelo' object.id %}">{% trans "Modify model" %}</a>
-        </p>
         <p>
             <a href="{% url 'eliminar_modelo' object.id %}">{% trans "Delete model" %}</a>
         </p>

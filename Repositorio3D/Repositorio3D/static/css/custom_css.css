@@ -17,6 +17,14 @@ a:hover {
     text-decoration: none;
 }
 
+.edit-model {
+    color: #ababab;
+}
+
+.edit-model:hover {
+    color: #343434;
+}
+
 .title_section {
     text-align: center;
     font-size: 30;
@@ -98,7 +106,7 @@ a:hover {
     margin: 10px;
 }
 
-.grid-colum {
+.grid-column {
     text-align: center;
     height: 240px;
 }

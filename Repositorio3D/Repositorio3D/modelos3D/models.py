@@ -48,6 +48,9 @@ class TagsModelos(models.Model):
     modelo = models.ForeignKey('Model3D')
     tag = models.CharField(max_length=50, blank=True)
 
+    def __unicode__(self):
+        return self.tag
+
     class Meta:
         verbose_name = 'Tag'
         verbose_name_plural = 'Tags'

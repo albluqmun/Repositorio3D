@@ -7,7 +7,7 @@
     <h2>{% trans "User" %} {{ user.username }}</h2>
     <div class="row grid-row">
         {% for modelo in modelos %}
-            <div class="col-lg-4 grid-colum">
+            <div class="col-lg-4 grid-column">
                 {% with modelo.imagenesmodelos_set.all|first as image %}
                     <img src="{{ image.imagen.url }}" class="minimagen" />
                     <br>

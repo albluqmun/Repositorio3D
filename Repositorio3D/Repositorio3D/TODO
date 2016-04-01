@@ -20,8 +20,11 @@ ACTUALMENTE HACINEDO
 *
 *
 
+- formulario update tags
+- tests
+- instalacion con requeriments
 - formulario modificar tu perfil
-- hacer que sólo el propio usuario o un administrador pueda modificar los modelos
+- hacer que sólo el propio usuario pueda modificar los modelos
 -clara.io
 
 
