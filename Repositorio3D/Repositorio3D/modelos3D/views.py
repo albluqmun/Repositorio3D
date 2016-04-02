@@ -18,7 +18,8 @@ from django.utils.decorators import method_decorator
 from formtools.wizard.views import SessionWizardView
 
 from Repositorio3D.modelos3D.models import Model3D, TagsModelos, ImagenesModelos
-from Repositorio3D.modelos3D.forms import CrearModelo3DForm, ImagenesModelosForm, TagsModelosForm
+from Repositorio3D.modelos3D.forms import (CrearModelo3DForm, ImagenesModelosForm,
+                                           TagsModelosForm, CreateTagForm)
 # from Repositorio3D.accounts.views import LoginRequiredMixin
 
 
@@ -51,18 +52,6 @@ class ModificarDescripcionModelo(BaseModificarModelo):
 
 class ModificarNombreModelo(BaseModificarModelo):
     fields = ['nombre']
-
-# por hacer!!!!
-# class ModificarTagModelo(UpdateView):
-#     model = TagsModelos
-#     form_class = TagsModelosForm
-#     pk_url_kwarg = 'modelo_id'
-#     template_name = 'modelos3D/actualizar_modelo.html'
-#
-#     def get_queryset(self):
-#         #cuidado
-#         import ipdb; ipdb.set_trace()
-#         return self.model.objects.filter(modelo_id=self.kwargs[self.pk_url_kwarg])
 
 
 class EliminarModelo(DeleteView):
@@ -113,6 +102,21 @@ class CrearModeloWizard(SessionWizardView):
         return ''.join(escaped_chars)
 
 
+class CrearTag(CreateView):
+    model = TagsModelos
+    form_class = CreateTagForm
+    template_name = 'modelos3D/crear_tag.html'
+
+    def get_success_url(self):
+        return reverse_lazy('lista_tag_modelo', kwargs=self.kwargs)
+
+    def get_form_kwargs(self):
+        kwargs_dict = super(CrearTag,self).get_form_kwargs()
+        modelo = Model3D.objects.get(id=self.kwargs['modelo_id'])
+        kwargs_dict['modelo'] = modelo
+        return kwargs_dict
+
+
 class VerModelosTags(ListView):
     # queryset = Model3D.objects.filter('-publication_date')
     context_object_name = 'modelos'
@@ -127,6 +131,22 @@ class VerModelosTags(ListView):
         context = super(VerModelosTags, self).get_context_data(**kwargs)
         nombre_tag = self.kwargs[self.pk_url_kwarg]
         context['nombre_tag'] = nombre_tag
+        return context
+
+
+class VerListaTagsModelo(ListView):
+    model = TagsModelos
+    pk_url_kwarg = 'modelo_id'
+    template_name = 'modelos3D/lista_tag_modelo.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(modelo_id=self.kwargs[self.pk_url_kwarg])
+
+    def get_context_data(self, **kwargs):
+        context = super(VerListaTagsModelo, self).get_context_data(**kwargs)
+        modelo = context.get('object_list')[0].modelo
+        context['nombre_modelo'] = modelo.nombre
+        context['id_modelo'] = modelo.id
         return context
 
 

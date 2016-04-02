@@ -30,7 +30,7 @@
             {% endif %}
         {% endfor %}
         {% ifequal user object.user %}
-            <a class="edit-model glyphicon glyphicon-pencil" href="{% url 'modificar_tag_modelo' object.id %}"></a>
+            <a class="edit-model glyphicon glyphicon-pencil" href="{% url 'lista_tag_modelo' object.id %}"></a>
         {% endifequal %}
     </div>
     <div class="descripcion_title">

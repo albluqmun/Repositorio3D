@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} - {% trans "Tags of" %} '{{nombre_modelo}}'{% endblock %}
+
+{% block body %}
+    <h2>{% trans "Tags of" %} <i>'{{nombre_modelo}}'</i></h2>
+    <ul>
+        {% for tag in object_list %}
+            <li>
+                <span>{{ tag.tag }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{% url 'crear_tag' id_modelo %}">{% trans "Add new tag" %}</a>
+{% endblock %}
