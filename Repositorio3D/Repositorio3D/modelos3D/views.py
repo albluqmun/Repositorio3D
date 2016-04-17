@@ -1,3 +1,4 @@
+# !/usr/bin/python
 # -*- coding: utf-8 -*-
 import htmlentitydefs
 
@@ -87,7 +88,7 @@ class CrearModeloWizard(SessionWizardView):
             ImagenesModelos.objects.create(modelo=modelo_creado)
 
         tags = form_dict['2']
-        sequency_tags = str(tags.data['2-tag']).split(',')
+        sequency_tags = tags.data['2-tag'].encode("utf-8").split(',')
         if not(len(sequency_tags) == 1 and sequency_tags[0] == ''):
             for single_tag in sequency_tags:
                 TagsModelos.objects.get_or_create(tag=single_tag.lstrip(), modelo=modelo_creado)

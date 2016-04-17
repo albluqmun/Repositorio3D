@@ -26,6 +26,13 @@ class TagsModelosForm(forms.ModelForm):
         model = TagsModelos
         fields = ('tag',)
 
+    def clean(self):
+        # traducciones
+        patron = re.compile(r'^([0-9a-zA-Z_ñÑáÁéÉíÍóÓúÚ,]+\s*)+$')
+        if patron.match(self.cleaned_data.get('tag').encode('utf8')) is None:
+            raise forms.ValidationError("Sólo se permiten caracteres alfanuméricos y _ sin empezar por espacios en blanco")
+        return self.cleaned_data
+
 
 class CreateTagForm(forms.ModelForm):
     modelo = forms.ModelChoiceField(queryset=Model3D.objects.all(), widget=forms.HiddenInput())
