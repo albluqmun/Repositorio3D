@@ -12,8 +12,17 @@
     <div class="row">
         <div class="col-lg-5">
             <p>
-                {% trans "Step" %} {{ wizard.steps.step1 }} de {{ wizard.steps.count }}
+                <h3>{% trans "Step" %} {{ wizard.steps.step1 }} {% trans "of" %} {{ wizard.steps.count }}</h3>
             </p>
+            {% if wizard.steps.step1 == 2 %}
+                <p>
+                    {% trans "This is the main image. Later, you can add more images and select the main image." %}
+                </p>
+            {% elif wizard.steps.step1 == 3 %}
+                <p>
+                    {% trans "Insert your tags separated by commas." %}
+                </p>
+            {% endif %}
             <form method="post" enctype="multipart/form-data" class="form">
                 {% csrf_token %}
                 {{ wizard.form.media }}
