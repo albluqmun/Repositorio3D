@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from django.http import HttpResponseRedirect
 from django.conf import settings
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.core.files.storage import FileSystemStorage
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -58,7 +58,9 @@ class EliminarModelo(DeleteView):
     # hacer que elimine tambien las imagenes asociadas
     model = Model3D
     pk_url_kwarg = 'modelo_id'
-    success_url = reverse_lazy('index')
+
+    def get_success_url(self):
+        return reverse_lazy('ver_mis_modelos', kwargs={'user_id': self.object.user_id})
 
 
 # hacer que solo se pueda crear un modelo si estas registrado
@@ -86,11 +88,10 @@ class CrearModeloWizard(SessionWizardView):
 
         tags = form_dict['2']
         sequency_tags = str(tags.data['2-tag']).split(',')
-        for single_tag in sequency_tags:
-            TagsModelos.objects.get_or_create(tag=single_tag.lstrip(), modelo=modelo_creado)
-
-        # esto reenviará a la página del modelo que se acaba de crear
-        return HttpResponseRedirect('/crear/')
+        if not(len(sequency_tags) == 1 and sequency_tags[0] == ''):
+            for single_tag in sequency_tags:
+                TagsModelos.objects.get_or_create(tag=single_tag.lstrip(), modelo=modelo_creado)
+        return HttpResponseRedirect('/modelos/%s/' % modelo_creado.id)
 
     def uescape(self, text):
         print repr(text)
@@ -117,15 +118,23 @@ class CrearTag(CreateView):
         return kwargs_dict
 
 
+class EliminarTag(DeleteView):
+    model = TagsModelos
+    pk_url_kwarg = 'tag_id'
+    template_name = 'modelos3D/tagsmodelos_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('lista_tag_modelo', kwargs={'modelo_id': self.object.modelo_id})
+
+
 class VerModelosTags(ListView):
-    # queryset = Model3D.objects.filter('-publication_date')
     context_object_name = 'modelos'
     pk_url_kwarg = 'tag_name'
     model = Model3D
     template_name = 'modelos3D/lista_tag_modelos.html'
 
     def get_queryset(self):
-        return self.model.objects.filter(tagsmodelos__tag=self.kwargs[self.pk_url_kwarg])
+        return self.model.objects.filter(tagsmodelos__tag__iexact=self.kwargs[self.pk_url_kwarg])
 
     def get_context_data(self, **kwargs):
         context = super(VerModelosTags, self).get_context_data(**kwargs)
@@ -144,26 +153,17 @@ class VerListaTagsModelo(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(VerListaTagsModelo, self).get_context_data(**kwargs)
-        modelo = context.get('object_list')[0].modelo
+        modelo = Model3D.objects.get(pk=self.kwargs['modelo_id'])
         context['nombre_modelo'] = modelo.nombre
         context['id_modelo'] = modelo.id
         return context
 
 
 class VerMisModelos(ListView):
-#     # queryset = Model3D.objects.filter('-publication_date')
     context_object_name = 'modelos'
     pk_url_kwarg = 'user_id'
     model = Model3D
-    # crear
     template_name = 'modelos3D/lista_mis_modelos.html'
 
     def get_queryset(self):
-        #cuidado
         return self.model.objects.filter(user_id=self.kwargs[self.pk_url_kwarg])
-
-#     def get_context_data(self, **kwargs):
-#         context = super(VerModelosTags, self).get_context_data(**kwargs)
-#         nombre_tag = self.kwargs[self.pk_url_kwarg]
-#         context['nombre_tag'] = nombre_tag
-#         return context

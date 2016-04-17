@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} - {% trans "Delete confirmation" %} {% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>{% trans "Are you sure you want to delete " %} "<i>{{ object }}</i>"?</p>
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                {% trans "Confirm" %}
+            </button>
+        {% endbuttons %}
+    </form>
+{% endblock %}
