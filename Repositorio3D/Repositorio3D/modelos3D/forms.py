@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os
 import re
+from datetime import datetime
 
 from django import forms
 from Repositorio3D.modelos3D.models import Model3D, ImagenesModelos, TagsModelos
@@ -18,6 +20,30 @@ class ImagenesModelosForm(forms.ModelForm):
     class Meta:
         model = ImagenesModelos
         fields = ('imagen',)
+
+
+class CreateImageForm(forms.ModelForm):
+    modelo = forms.ModelChoiceField(queryset=Model3D.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = ImagenesModelos
+        fields = ('imagen','modelo')
+
+    def __init__(self, *args, **kwargs):
+        modelo = kwargs.pop('modelo', None)
+        super(CreateImageForm, self).__init__(*args, **kwargs)
+        if modelo:
+            self.fields['modelo'].initial = modelo
+
+    def clean(self):
+        modelo = self.cleaned_data.get('modelo')
+        imagenes = modelo.get_imagenes()
+        if len(imagenes) == 1 and imagenes[0].imagen.url == '/media/image-not-available.png':
+            imagenes[0].delete()
+        actual_time = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
+        imagen_file = self.cleaned_data.get('imagen')
+        imagen_file.name = '%s-%s%s' % (modelo.nombre, actual_time, os.path.splitext(imagen_file.name)[-1])
+        return self.cleaned_data
 
 
 class TagsModelosForm(forms.ModelForm):

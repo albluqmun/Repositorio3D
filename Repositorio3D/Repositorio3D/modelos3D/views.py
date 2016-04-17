@@ -20,7 +20,8 @@ from formtools.wizard.views import SessionWizardView
 
 from Repositorio3D.modelos3D.models import Model3D, TagsModelos, ImagenesModelos
 from Repositorio3D.modelos3D.forms import (CrearModelo3DForm, ImagenesModelosForm,
-                                           TagsModelosForm, CreateTagForm)
+                                           TagsModelosForm, CreateTagForm,
+                                           CreateImageForm)
 # from Repositorio3D.accounts.views import LoginRequiredMixin
 
 
@@ -159,6 +160,36 @@ class VerListaTagsModelo(ListView):
         context['id_modelo'] = modelo.id
         return context
 
+
+class SubirImagen(CreateView):
+    model = ImagenesModelos
+    form_class = CreateImageForm
+    template_name = 'modelos3D/subir_imagen.html'
+
+    def get_success_url(self):
+        return reverse_lazy('lista_imagenes_modelo', kwargs=self.kwargs)
+
+    def get_form_kwargs(self):
+        kwargs_dict = super(SubirImagen,self).get_form_kwargs()
+        modelo = Model3D.objects.get(id=self.kwargs['modelo_id'])
+        kwargs_dict['modelo'] = modelo
+        return kwargs_dict
+
+
+class VerListaImagenesModelo(ListView):
+    model = ImagenesModelos
+    pk_url_kwarg = 'modelo_id'
+    template_name = 'modelos3D/lista_imagenes_modelo.html'
+
+    def get_queryset(self):
+        return self.model.objects.filter(modelo_id=self.kwargs[self.pk_url_kwarg])
+
+    def get_context_data(self, **kwargs):
+        context = super(VerListaImagenesModelo, self).get_context_data(**kwargs)
+        modelo = Model3D.objects.get(pk=self.kwargs['modelo_id'])
+        context['nombre_modelo'] = modelo.nombre
+        context['id_modelo'] = modelo.id
+        return context
 
 class VerMisModelos(ListView):
     context_object_name = 'modelos'

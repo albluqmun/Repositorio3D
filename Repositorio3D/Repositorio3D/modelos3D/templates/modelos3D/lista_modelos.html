@@ -9,9 +9,9 @@
         {% for modelo in object_list %}
             <div class="col-lg-4 grid-column">
                 {% with modelo.imagenesmodelos_set.all|first as image %}
-                    <img class="minimagen" src="{{ image.imagen.url }}" />
+                    <a href="{% url 'detalle_modelos' modelo.id %}"><img class="minimagen" src="{{ image.imagen.url }}" />
                     <br>
-                    <a href="{% url 'detalle_modelos' modelo.id %}">{{ modelo.nombre }}</a>
+                    {{ modelo.nombre }}</a>
                 {% endwith %}
             </div>
             {% if forloop.counter|divisibleby:3 %}

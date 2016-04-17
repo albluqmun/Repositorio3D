@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ block.super }} - {% trans "Images of" %} '{{nombre_modelo}}'{% endblock %}
+
+{% block body %}
+    <h2>{% trans "Images of" %} <i><a href="{% url 'detalle_modelos' id_modelo %}">'{{nombre_modelo}}'</a></i></h2>
+    <ul>
+        {% for image in object_list %}
+            <li>
+                <img src="{{ image.imagen.url }}" class="minimagen" />
+            </li>
+        {% endfor %}
+    </ul>
+    <a class="btn btn-primary" href="{% url 'subir_imagen' id_modelo %}">{% trans "Upload new image" %}</a>
+{% endblock %}
