@@ -117,3 +117,12 @@ a:hover {
     max-width: 150px;
     max-height: 150px
 }
+
+.manage-images {
+    margin-top: 10px;
+}
+
+.lista-imagenes {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

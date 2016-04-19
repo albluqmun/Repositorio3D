@@ -4,13 +4,7 @@
 - hacer q el has olvidado tu contraseña? sea solo para usuarios no registrados
 
 - El login required para crear un modelo redirige a perfil en lugar de crear un modelo
--Acentos, ñ en los tags -> Problema del unicode al español:
-    import sys
 
-    reload(sys)
-    sys.setdefaultencoding('utf8')
-
-- modficar modelo: que se cambie tambien las imagenes y los tags
 - el campo tag en el formulario crear debe admitir mas caracteres
 
 
@@ -19,8 +13,7 @@
 ACTUALMENTE HACINEDO
 *
 *
-
-- formulario update tags
+- RATING
 - tests
 - instalacion con requeriments
 - formulario modificar tu perfil

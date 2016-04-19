@@ -5,9 +5,10 @@
 {% block title %}{{ block.super }} - {% trans "Delete confirmation" %} {% endblock %}
 
 {% block body %}
+    <p>{% trans "Are you sure you want to delete next image? " %}</p>
+    <img src="{{ imagen.imagen.url }}" class="minimagen lista-imagenes" />
     <form action="" method="post">
         {% csrf_token %}
-        <p>{% trans "Are you sure you want to delete " %} "<i>{{ object }}</i>"?</p>
         {% buttons %}
             <button type="submit" class="btn btn-primary">
                 {% trans "Delete" %}

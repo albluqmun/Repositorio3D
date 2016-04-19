@@ -7,8 +7,11 @@
     <h2>{% trans "Images of" %} <i><a href="{% url 'detalle_modelos' id_modelo %}">'{{nombre_modelo}}'</a></i></h2>
     <ul>
         {% for image in object_list %}
-            <li>
+            <li class="lista-imagenes">
                 <img src="{{ image.imagen.url }}" class="minimagen" />
+                {% if object_list|length != 1 %}
+                    <a class='glyphicon glyphicon-trash' href="{% url 'eliminar_imagen' image.id %}"></a>
+                {% endif %}
             </li>
         {% endfor %}
     </ul>

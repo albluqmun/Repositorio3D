@@ -44,15 +44,17 @@
                 <span class="sr-only">Next</span>
               </a>
             </div>
-            {% ifequal user object.user %}
-                <a class="btn btn-primary" href="{% url 'lista_imagenes_modelo' object.id %}">{% trans "Manage images" %}</a>
-            {% endifequal %}
         </div>
         <div class="valoracion col-lg-4">
             {{ object.valoracion|floatformat }}
             <div class="autor">
                 {% trans "Author" %}: {{ object.user }}
             </div>
+        </div>
+        <div class="manage-images col-lg-4">
+            {% ifequal user object.user %}
+            <a class="btn btn-primary" href="{% url 'lista_imagenes_modelo' object.id %}">{% trans "Manage images" %}</a>
+            {% endifequal %}
         </div>
     </div>
 

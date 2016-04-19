@@ -176,6 +176,20 @@ class SubirImagen(CreateView):
         return kwargs_dict
 
 
+class EliminarImagen(DeleteView):
+    model = ImagenesModelos
+    pk_url_kwarg = 'imagen_id'
+    template_name = 'modelos3D/imagen_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('lista_imagenes_modelo', kwargs={'modelo_id': self.object.modelo_id})
+
+    def get_context_data(self, **kwargs):
+        context = super(EliminarImagen, self).get_context_data(**kwargs)
+        imagen = self.model.objects.get(pk=self.kwargs[self.pk_url_kwarg])
+        context['imagen'] = imagen
+        return context
+
 class VerListaImagenesModelo(ListView):
     model = ImagenesModelos
     pk_url_kwarg = 'modelo_id'

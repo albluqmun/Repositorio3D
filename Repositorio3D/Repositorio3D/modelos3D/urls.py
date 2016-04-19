@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'modelos/nuevo/$', views.CrearModeloWizard.as_view(), name="crear_modelo"),
     url(r'tag/(?P<tag_id>\d+)/eliminar/$', views.EliminarTag.as_view(), name="eliminar_tag"),
     url(r'tag/(?P<tag_name>(\w+\s*)+)/$', views.VerModelosTags.as_view(), name="ver_modelos_tags"),
+    url(r'imagen/(?P<imagen_id>\d+)/eliminar/$', views.EliminarImagen.as_view(), name="eliminar_imagen"),
 
     # este nombre es muy feo
     url(r'usuario/(?P<user_id>\d+)/mis_modelos$', views.VerMisModelos.as_view(), name="ver_mis_modelos"),
